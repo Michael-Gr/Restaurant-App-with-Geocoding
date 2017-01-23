@@ -1,0 +1,39 @@
+= form_for @restaurant, html: { class: "form-horizontal", role: "form" } do |f|
+  -if @restaurant.errors.any?
+    .alert.alert-danger.alert-dismissable{role: "alert"}
+      %button.close{type: "button", data: {dismiss: "alert"} }
+        %span{aria: {hidden: "true"} } &times;
+        %span.sr-only Close
+      %h4= "#{pluralize(@restaurant.errors.count, "error")} prohibited this restaurant from being saved:"
+
+      %ul
+        - @restaurant.errors.full_messages.each do |msg|
+          %li= msg
+
+  .col-sm-10
+    %p
+      = f.text_field :name, class: 'form-control', placeholder: 'Name'
+  .col-sm-10
+    %p
+      = f.text_field :address, class: 'form-control', placeholder: 'Address'
+  .col-sm-10
+    %p
+      = f.text_field :phone, class: 'form-control', placeholder: 'Phone'
+  .col-sm-10
+    %p
+      = f.text_field :website, class: 'form-control', placeholder: 'Website'
+  .col-sm-10
+    %p
+      = f.text_area :hours, class: 'form-control', placeholder: 'Hours'
+  .col-sm-10
+    %p
+      = f.select :price, options_for_select( Restaurant::PRICES, @restaurant.cuisine), class: 'form-control'
+  .col-sm-10
+    %p
+      = f.select :cuisine, options_for_select( Restaurant::CUISINES, @restaurant.cuisine), class: 'form-control'
+  .col-sm-4
+    %p
+      = f.attachment_field :menu, class: 'form-control'
+    %p
+      .form-group
+      = f.submit class: 'btn btn-success'

@@ -1,0 +1,51 @@
+!!!
+%html
+  %head
+    %meta{charset: "utf-8"}
+    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
+    %meta{content: "", name: "description"}
+    %meta{content: "", name: "author"}
+    %title
+      = RestaurantApp
+
+    / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    /[if lt IE 9]
+      = javascript_include_tag "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js", "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %nav.navbar.navbar-inverse.navbar-fixed-top{role: "navigation"}
+      .container
+        .navbar-header.logo
+          %button.navbar-toggle.collapsed{type: "button", data: {toggle: "collapse", target: "#navbar"}, aria: {expanded: "false", controls: "navbar"} }
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to root_path, class: "navbar-brand" do
+            𝓔𝓪𝓽 𝓢𝓽. 𝓟𝓮𝓽𝓮
+        #navbar.collapse.navbar-collapse
+          %ul.nav.navbar-nav.navbar-right
+            - if logged_in?
+              %li
+                = link_to current_user.name, '#'
+              %li
+                = link_to 'Not you? Logout', logout_path
+              %li
+                = link_to new_restaurant_path do
+                  Add Restaurant
+            - else
+              %li
+                = link_to 'Login with Github', auth_path(provider: 'github')
+
+    .container.background
+      - flash.each do |name, msg|
+        = content_tag :div, class: "alert alert-#{name == :error ? "danger" : "success" } alert-dismissable", role: "alert" do
+          %button.close{type: "button", data: {dismiss: "alert"} }
+            %span{aria: {hidden: "true"} } &times;
+            %span.sr-only Close
+          = msg
+      = yield

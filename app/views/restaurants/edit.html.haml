@@ -1,0 +1,19 @@
+%img#bg{:alt => "https://upload.wikimedia.org/wikipedia/commons/6/66/Saint_Petersburg_Florida_at_Night_from_McNulty_Lofts.png", :src => "https://upload.wikimedia.org/wikipedia/commons/6/66/Saint_Petersburg_Florida_at_Night_from_McNulty_Lofts.png"}/
+
+%h1.new-header
+  𝓔𝓭𝓲𝓽 𝓡𝓮𝓼𝓽𝓪𝓾𝓻𝓪𝓷𝓽
+
+.col-md-6.restaurant-listing-edit
+  = image_tag attachment_url(@restaurant.photos.first, :image), class: 'img-responsive'
+
+.col-md-6
+  .row
+    = render 'form'
+  .col-sm-2.form-button
+    = link_to @restaurant, class: 'btn btn-primary' do
+      %span.glyphicon.glyphicon-info-sign
+      Back
+  .col-sm-2.form-button
+    = link_to @restaurant, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }, method: :delete do
+      %span.glyphicon.glyphicon-remove
+      Delete
