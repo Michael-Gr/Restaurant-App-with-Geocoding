@@ -34,7 +34,10 @@ gem 'omniauth-github'
 # File uploading
 gem "refile", github: "gstark/refile", branch: "updates-for-rails-5", require: "refile/rails"
 gem "refile-postgres"
- 
+
+# API
+gem "httparty"
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

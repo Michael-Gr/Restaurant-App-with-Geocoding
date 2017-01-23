@@ -11,6 +11,9 @@
   = image_tag attachment_url(@restaurant.photos.first, :image), class: 'img-responsive'
 
 .col-md-6.restaurant-listing
+  %iframe{:allowfullscreen => "", :frameborder => "0", :height => "350", :src => "https://www.google.com/maps/embed/v1/place?key=AIzaSyAEAQx4ZKhZcj8im25XgbVfOuxvBaJ9Rr4&q=#{@restaurant.address}", :style => "border:0", :width => "500"}
+
+.col-md-7.col-sm-12.restaurant-listing
   %h1
     = @restaurant.name
   %p

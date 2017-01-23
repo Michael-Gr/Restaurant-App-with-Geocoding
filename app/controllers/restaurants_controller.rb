@@ -31,6 +31,8 @@ class RestaurantsController < ApplicationController
   def create
     @restaurant = Restaurant.new(restaurant_params)
 
+    Geocode.new(@restaurant).lookup
+
     if @restaurant.save
       redirect_to @restaurant, notice: 'Restaurant was successfully created.'
     else
@@ -41,7 +43,9 @@ class RestaurantsController < ApplicationController
   # PATCH/PUT /restaurants/1
   def update
     @restaurant = Restaurant.find(params[:id])
+
     if @restaurant.update(restaurant_params)
+      Geocode.new(@restaurant).lookup
       redirect_to @restaurant, notice: 'Restaurant was successfully updated.'
     else
       render :edit
